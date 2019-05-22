@@ -1,0 +1,68 @@
+server:
+  port: 9000
+#  port: 80
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  datasource:
+     driver-class-name: com.mysql.jdbc.Driver
+     url: jdbc:mysql://10.11.13.157:3306/giveu_inform?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+     username: inform_rw
+     password: Rw_inform$201812
+#     url: jdbc:mysql://10.12.11.185:3306/giveu_inform?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+#     username: inform_rw
+#     password: Rw_inform$201808
+     initialSize: 2
+     minIdle: 1
+     maxActive: 5
+     maxWait: 60000
+     timeBetweenEvictionRunsMillis: 60000
+     validationQuery: SELECT 1
+     testWhileIdle: true
+     testOnBorrow: true
+     testOnReturn: false
+     poolPreparedStatements: true
+     maxPoolPreparedStatementPerConnectionSize: 5
+     filters: stat
+  http:
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
+  mvc:
+      static-path-pattern: /**
+  thymeleaf:
+      prefix: classpath:/templates/
+      moded: LEGACYHTML5
+      suffix: .html
+      encoding: utf-8
+      cache: false
+      content-type: text/html
+  data:
+      mongodb:
+        uri: mongodb://10.11.11.113:27017/GiveU_Monitor_Log?maxPoolSize=256
+#        uri: mongodb://user01:Mogo$201805@10.12.11.34:27017/GiveU_Monitor_Log?maxPoolSize=256
+
+#  resources:
+#    static-locations: classpath:/static/
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.giveu.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+wechat:
+   corpid: wwb981ad700307c7d8
+   agentid: 1000002
+   secret: c61a2037LUEg2LG7XrL-IgNLj2XNEi0q4yGSsxXA-2U
+   department_id: 1
+   url:
+       tokenurl: https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={corpid}&corpsecret={corpsecret}
+       userlisturl: https://qyapi.weixin.qq.com/cgi-bin/user/list?access_token={access_token}&department_id={department_id}&fetch_child={fetch_child}
+       sendMsgUrl: https://qyapi.weixin.qq.com/cgi-bin/message/send?
+       taskListUrl: http://10.10.11.52:9060/job/list
+       dataListUrl: http://10.10.11.52:9040/monitor/list
+logging:
+  config: classpath:logback.xml

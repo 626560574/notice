@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>任务调度主题</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<span style="display: none" id="top-model-json" th:text="${topModelJson}" ></span>
+<div class="container">
+    <div class="row" style="margin-top: 15px; padding: 0 10px;">
+        <div style="border: 1px solid #000; height: 120px; background-color: #EFEFEF;">
+            <div class="col-xs-3" style="float: left; border-right: 1px solid #000;"><h3 style="line-height: 75px; height: 87px;">频率</h3></div>
+            <div class="col-xs-9" style="float: right; padding: 5px 8px"><span>共有任务 <i class="jobCount">0</i> 个，近<i class="days">0</i>日共执行任务 <i class="triggerCount">0</i> 次，平均 <i class="triggerAvg">0</i> 次/任务，其中[<i class="jobMaxName">0</i>] 执行<i class="jobMaxCount">0</i>次最多，[<i class="jobMinName">0</i>]执行<i class="jobMinCount">0</i>次最少</span></div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 15px; padding: 0 10px;">
+        <div style="border: 1px solid #000; height: 120px; background-color: #EFEFEF;">
+            <div class="col-xs-3" style="float: left; border-right: 1px solid #000;"><h3 style="line-height: 75px; height: 87px;">失败</h3></div>
+            <div class="col-xs-9" style="float: right; padding: 4px 5px"><span>共有任务 <i class="jobCount">0</i> 个，近<i class="days">0</i>日发生失败任务<i class="jobFailCount">0</i>个，占比<i class="jobFailPct">0</i>%，近30日共执行任务<i class="triggerCount">0</i>次，失败<i class="triggerFailCount">0</i>次，占比 <i class="triggerFailPct">0</i>%，其中[<i class="triggerFailMaxName">0</i>]失败 <i class="triggerFailMaxCount">0</i>次 最多</span></div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 15px; padding: 0 10px;">
+        <div style="border: 1px solid #000; height: 90px; background-color: #EFEFEF;">
+            <div class="col-xs-3" style="float: left; border-right: 1px solid #000;"><h3 style="line-height: 45px; height: 57px;">耗时</h3></div>
+            <div class="col-xs-9" style="float: right; padding: 4px 5px"><span>共有任务 <i class="jobCount">0</i> 个，近<i class="days">0</i>日共执行任务 <i class="triggerCount">0</i>次，平均耗时 <i class="leadTimeAvg">0</i> ms 次/任务，最长耗时 <i class="maxLeadTime">0</i> ms ,最低耗时 <i class="minLeadTime">0</i> ms</span></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
+<script>
+
+    $(function() {
+        var topModelJson = $("#top-model-json").text();
+        var topModel = JSON.parse(topModelJson);
+        console.log(topModel);
+
+//        $(".jobCount").text(topModel.topFrequencyModel.jobCount);
+//        $(".days").text(topModel.topFrequencyModel.days);
+//        $(".jobMaxCount").text(topModel.topFrequencyModel.jobMaxCount);
+//        $(".jobMaxName").text(topModel.topFrequencyModel.jobMaxName);
+//        $(".jobMinCount").text(topModel.topFrequencyModel.jobMinCount);
+//        $(".jobMinName").text(topModel.topFrequencyModel.jobMinName);
+//        $(".triggerAvg").text(topModel.topFrequencyModel.triggerAvg);
+//        $(".triggerCount").text(topModel.topFrequencyModel.triggerCount);
+//
+//
+//
+//
+//        $(".jobFailCount").text(topModel.topFailModel.jobFailCount);
+//        $(".jobFailPct").text(topModel.topFailModel.jobFailPct);
+//        $(".triggerFailCount").text(topModel.topFailModel.triggerFailCount);
+//        $(".triggerFailMaxCount").text(topModel.topFailModel.triggerFailMaxCount);
+//        $(".triggerFailMaxName").text(topModel.topFailModel.triggerFailMaxName);
+//        $(".triggerFailPct").text(topModel.topFailModel.triggerFailPct);
+//
+//
+//        $(".leadTimeAvg").text(topModel.topLeadTimeModel.leadTimeAvg);
+//        $(".maxLeadTime").text(topModel.topLeadTimeModel.maxLeadTime);
+//        $(".minLeadTime").text(topModel.topLeadTimeModel.minLeadTime);
+
+        for (var topModelKey in topModel) {
+            var model = topModel[topModelKey];
+            for (var key in model) {
+                $("." + key).text(model[key]);
+            }
+        }
+    });
+
+</script>
+</html>

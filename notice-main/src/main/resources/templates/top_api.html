@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>任务调度主题</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<span style="display: none" id="top-model-json" th:text="${topModelJson}"></span>
+<div class="container">
+    <!--<div class="row" style="margin-top: 15px; padding: 0 10px;">-->
+    <!--<div style="border: 1px solid #000; height: 120px; background-color: #EFEFEF;">-->
+    <!--<div class="col-xs-3" style="float: left; border-right: 1px solid #000;"><h3 style="padding-top: 10px; height: 87px;">系统流量</h3></div>-->
+    <!--<div class="col-xs-9" style="float: right; padding: 5px 8px"><span>共有系统<i class="proCout">0</i>个，共有活跃接口 <i class="apiCount">0</i> 个，近<i class="days">0</i>日调用接口<i class="invCount">0</i>次，[<i class="apiMaxName">0</i>]拥有最多接口 <i class="apiMaxCount">0</i> 个，[<i class="apiMinName">0</i>]接口最少 <i class="apiMinCount">0</i> 个,[<i class="apiInvMaxName">0</i>]拥有最多调用次数 <i class="apiInvMaxCount">0</i>次,[<i class="apiInvMinName">0</i>]调用次数最少 <i class="apiInvMinCount">0</i> 次</span></div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="row" style="margin-top: 15px; padding: 0 10px;">
+        <div style="border: 1px solid #000; height: 112px; background-color: #EFEFEF;">
+            <div class="col-xs-3" style="float: left; border-right: 1px solid #000;"><h3 style="height: 80px; ">系统异常</h3></div>
+            <div class="col-xs-9" style="float: right; padding: 5px 8px"><span>共有系统<i class="proCout">0</i>个，近<i class="days">0</i>日出现异常 <i class="excCount">0</i>次；其中[<i class="proExcMaxName">0</i>]出现异常 <i
+                    class="proExcMaxCount">0</i> 次最多,[<i class="proExcMinName">0</i>]出现异常 <i class="proExcMinCount">0</i> 次最少; </span></div>
+        </div>
+    </div>
+    <!--<div class="row" style="margin-top: 15px; padding: 0 10px;">-->
+    <!--<div style="border: 1px solid #000; height: 150px; background-color: #EFEFEF;">-->
+    <!--<div class="col-xs-3" style="float: left; border-right: 1px solid #000;"><h3 style="padding-top: 25px; height: 118px;">主机流量</h3></div>-->
+    <!--<div class="col-xs-9" style="float: right; padding: 5px 8px"><span>共有服务器主机<i class="serCout">0</i>台，近<i class="days">0</i>日调用接口<i class="invCount">0</i>次，承载系统最多主机为[<i class="serProMaxName">0</i>]部署系统<i class="serProMaxCount">0</i>个,承载系统最少主机[<i class="serProMinName">0</i>]部署系统<i class="serProMinCount">0</i>个,主机[<i class="invMaxSerName">0</i>]接口调用次数最多 <i class="invMaxSerCount">0</i> 次,主机[<i class="invMinSerName">0</i>]调用次数最少为 <i class="invMinSerCount">0</i> 次</span></div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="row" style="margin-top: 15px; padding: 0 10px;">
+        <div style="border: 1px solid #000; height: 90px; background-color: #EFEFEF;">
+            <div class="col-xs-3" style="float: left; border-right: 1px solid #000;"><h3 style="height: 57px;">主机异常</h3></div>
+            <div class="col-xs-9" style="float: right; padding: 5px 8px"><span>共有服务器主机<i class="serCout">0</i>台，近<i class="days">0</i>日出现异常 <i class="invExcCount">0</i> 次;主机[<i
+                    class="invExcMaxSerName">0</i>]异常次数最多 <i class="invExcMaxSerCount">0</i> 次,主机[<i class="invExcMinSerName">0</i>]异常次数最少 <i class="invExcMinSerCount">0</i> 次</span></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
+<script>
+
+    $(function () {
+        var topModelJson = $("#top-model-json").text();
+        var topModel = JSON.parse(topModelJson);
+        console.log(topModel);
+
+        for (var topModelKey in topModel) {
+            var model = topModel[topModelKey];
+            for (var key in model) {
+                $("." + key).text(model[key]);
+            }
+        }
+    });
+
+</script>
+</html>

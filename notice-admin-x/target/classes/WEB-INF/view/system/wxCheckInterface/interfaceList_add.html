@@ -1,0 +1,49 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content" style="padding: 0px 10px;">
+        <div class="form-horizontal">
+            <input type="hidden" id="id" value="">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">项目名称</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="proName" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">接口服务地址</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="proAddress" type="text" style="height: 60px;"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">是否启用</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="monitorStatus">
+                                <option value="1" selected="selected">启用</option>
+                                <option value="2">禁用</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">预警对象</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="receivers" type="text" />
+                            <#table class="form-control" id="UserListTable"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row btn-group-m-t">
+            <div class="col-sm-10">
+                <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="InterfaceListInfoDlg.addSubmit()"/>
+                <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="InterfaceListInfoDlg.close()"/>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="${ctxPath}/static/modular/system/wxCheckInterface/interfaceList_info.js"></script>
+@}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/giveu-notice-center.iml" filepath="$PROJECT_DIR$/giveu-notice-center.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notice-admin-x/notice-admin-x.iml" filepath="$PROJECT_DIR$/notice-admin-x/notice-admin-x.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notice-common/notice-common.iml" filepath="$PROJECT_DIR$/notice-common/notice-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notice-main/notice-main.iml" filepath="$PROJECT_DIR$/notice-main/notice-main.iml" />
+    </modules>
+  </component>
+</project>

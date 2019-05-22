@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>接口预警</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<span style="display: none" id="list-json" th:text="${listJson}"></span>
+<div class="container">
+    <div id="info-list">
+        <div style="width: 100%; padding: 0px; margin: 0px;">
+            <div style="width: 100%; font-weight: bold; text-align: left;padding-left: 10px; vertical-align: middle; line-height: 30px; ">审核系统</div>
+            <div style="width: 100%;background-color: beige; border: 1px solid black;">
+                累计接口异常 200次 今日接口异常 20 次;
+                异常在服务中分布如下：
+                10.11.31.203:6061站点异常50次，今日2次;
+                10.11.31.202:6061站点异常80次，今日10次;
+                10.11.31.190:6061站点异常130次，今日8次;
+                异常接口TOP10如下：
+                /api/Audit/GetContractDetail 共 100次,今日 15次
+                /api/Zhengxin/CheckPyartificialnational 共20次,今日2次
+                /api/Audit/GetContractDetail 共 10次,今日1次
+            </div>
+
+            <div style="width: 100%; font-weight: bold; text-align: left;padding-left: 10px; vertical-align: middle; line-height: 30px; ">决策系统</div>
+            <div style="width: 100%;background-color: beige; border: 1px solid black;">
+                <a href="javascript:void(0);" onclick="GlobalStatApiObj.proClick();" style="line-height: 50px; margin-left: 20px;" >点击加载统计详情</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
+<script src="/js/stat_api.js"></script>
+</html>

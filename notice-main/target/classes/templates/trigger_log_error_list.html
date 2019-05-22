@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title th:text="${jobName}"></title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <table class="table table-bordered">
+            <tr th:if="${triggerLogList.size()} eq 0">
+                <td colspan="3">没有错误日志信息！！</td>
+            </tr>
+            <!-- On cells (`td` or `th`) -->
+            <tr th:each="triggerLog : ${triggerLogList}" th:attr="data-id=${triggerLog.id}" class="data_tr">
+                <td>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <p><span th:text="${#dates.format(triggerLog.triggerTime, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+                            <p>执行耗时<span th:text="${triggerLog.leadTime}+'ms'"></span>，回调次数 <span
+                                    th:text="${triggerLog.callbackCount}"></span>次</p>
+                            <p>执行结果：<span th:text="${triggerLog.executeStatus==1?'成功':'失败'}"></span></p>
+                        </div>
+                        <div class="col-xs-4 text-right">
+                            <button th:attr="log-id=${triggerLog.id}" class="btn btn-primary executeBtn">手动执行</button>
+                            <br />
+                            <span style="color: red; line-height: 30px; margin-right: 5px;">手动执行<i th:attr="id=${triggerLog.id}" class="trigger-count-class">0</i>次 </span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
+<script>
+
+    $(function () {
+
+        $(".trigger-count-class").each(function() {
+            var logId = $(this).attr("id");
+            var triggerCount = localStorage.getItem(logId);
+            if (triggerCount != null) {
+                $(this).text(triggerCount);
+            }
+        });
+
+
+        //手动执行
+        ExecutePost();
+        //点击查看详情
+//        Detail();
+    });
+
+    //手动执行
+    function ExecutePost() {
+        $(".executeBtn").on("click", function (event) {
+            //阻止冒泡
+            event.stopPropagation();
+            var logId = $(this).attr("log-id");
+            layer.confirm('您确定要手动执行吗？', {
+                btn: ['确定', '取消'] //按钮
+            }, function () {
+                $.ajax({
+                    url: "/mobile/job/trigger",
+                    data: {"logId": logId},
+                    type: "post",
+                    success: function (result) {
+                        if (result.code == "200") {
+                            layer.msg('执行成功!');
+                            console.log(logId);
+                            var triggerCount = localStorage.getItem(logId);
+                            if (triggerCount == null) {
+                                triggerCount = 0;
+                                localStorage.setItem(logId, triggerCount);
+                            }
+                            triggerCount = parseInt(triggerCount);
+                            triggerCount++;
+                            localStorage.setItem(logId, triggerCount);
+                            $("#" + logId).text(triggerCount);
+                            console.log(triggerCount);
+//                            if (triggerCount != null) {
+//                                triggerCount = parseInt(triggerCount);
+//                                triggerCount++;
+//                            }
+//
+//                            $("#" + logId).text(triggerCount);
+//
+//                            localStorage.setItem(logId, triggerCount);
+                        }
+                        else {
+                            layer.alert(result.message);
+                        }
+                    }
+                });
+            }, function () {
+                layer.close(layer.index);
+            });
+
+        });
+    }
+
+    //详情
+    function Detail() {
+        $(".data_tr").on("click", function () {
+            var id = $(this).attr("data-id");
+            location.href = "/taskMobile/getDetail/" + id;
+        });
+        // $("#btn-search").on("click", function () {
+        //     var objName = $("#objName").val();
+        //     var url="/dataMobile/getList";
+        //   var  reqData={objName:objName};
+        //     load(url, reqData, function(response){//回调函数
+        //
+        //     })
+        // });
+
+    }
+</script>
+</html>
